@@ -28,7 +28,7 @@ abstract class Seeder
      *
      * @param  array|string  $class
      * @param  bool  $silent
-     * @return void
+     * @return $this
      */
     public function call($class, $silent = false)
     {
@@ -41,6 +41,8 @@ abstract class Seeder
 
             $this->resolve($class)->__invoke();
         }
+
+        return $this;
     }
 
     /**
@@ -106,7 +108,7 @@ abstract class Seeder
     /**
      * Run the database seeds.
      *
-     * @return void
+     * @return mixed
      *
      * @throws \InvalidArgumentException
      */

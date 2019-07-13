@@ -11,6 +11,9 @@
     <link rel="icon" href="images/favicon.ico" type="image/ico" />
     <title>@yield('title', 'SEPOA')</title>
     <!-- Bootstrap -->
+    <script src="{{ asset('js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{ asset('js/alertify.js') }}" defer></script>
+
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -26,6 +29,10 @@
     <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+
+    <link href="{{ asset('css/alertify.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/default.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/semantic.css') }}" rel="stylesheet">
 </head>
 
 <body class="nav-md">
@@ -43,8 +50,8 @@
                             <img src="images/img.jpg" alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
-                            <span>Welcome</span>
-                            <h2>Usuario</h2>
+                            <span>Bienvenido</span>
+                            <h2>{{ Auth::user()->name }}</h2>
                         </div>
                     </div>
                     <!-- /menu profile quick info -->
