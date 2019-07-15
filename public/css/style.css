@@ -1,3 +1,20 @@
 tr, td{
     text-align: center;
 }
+
+.loginStyle{
+    background-color: white;
+    padding: 6rem;
+    border-radius: 2rem;
+}
+
+body{
+    /* #2A3F54 */
+    background-color: #2A3F54 !important;
+}
+
+.imgLoginStyle{
+    position: absolute;
+    top: -3rem;
+    left: 5rem;
+}

@@ -10,12 +10,7 @@
             <div class="modal-body">
                 @include('GestionPeriodo.cuerpo_modal_periodo')
                 @include('GestionPeriodo.tabla_evaluacion')
-                @include('GestionPeriodo.modal_de_confirmacion')
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">
-                    Launch demo modal
-                </button>
+                <!-- @include('GestionPeriodo.modal_de_confirmacion') -->
             </div>
         </div>
     </div>

@@ -12,11 +12,6 @@
 */
 Auth::routes();
 
-// Pruebas
-Route::get('/prueba', function(){
-    return view('prueba');
-});
-
 // Home
 Route::get('/', function () {
     return view('welcome');

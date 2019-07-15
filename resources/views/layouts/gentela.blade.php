@@ -10,11 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="images/favicon.ico" type="image/ico" />
     <title>@yield('title', 'SEPOA')</title>
-    <!-- Bootstrap -->
+    <!-- JQuery -->
     <script src="{{ asset('js/jquery-3.3.1.min.js')}}"></script>
+    <!-- Aletify -->
     <script src="{{ asset('js/alertify.js') }}" defer></script>
-
-
+<!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
