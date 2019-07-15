@@ -3,14 +3,14 @@ $(document).ready(function () {
     GargarTodo()
     $(document).on("submit","#formulario_subida_evidencias",function (e) {
         e.preventDefault()
-        var formData = new FormData($(this)[0]);
-        console.log(formData)
-        var id=$(this).val()
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+        var formData = new FormData($(this)[0]);
+        console.log(formData)
+        var id=$(this).val()
         $.ajax({
             type: "POST",
             url: "subirEvidencia/" + id,

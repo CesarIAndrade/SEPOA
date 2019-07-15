@@ -110,17 +110,20 @@ class MetaEvaluacionController extends Controller
     }
     public function GuardarArchivo(request $request, $id)
     {
+        // dd($request->porcentaje_cumplido);
         $metaeval=MetaEvaluacion::find($id);
-        if ($request->hasFile('archivo')){ 
+        if ($request->hasFile('archivo_subido')){ 
             $metaeval->porcentaje_cumplido=$request->porcentaje_cumplido;
-            $archivo=$request->file('archivo');
+            $archivo=$request->file('archivo_subido');
             $ruta=time().''.$archivo->getClientOriginalName();
             if ($metaeval->evidencia!=null):
                 Storage::disk('ArchivosSubidos')->delete($metaeval->evidencia);
-            endif;            
+            endif;
+           
             Storage::disk('ArchivosSubidos')->put($ruta, file_get_contents($archivo->getRealPath()));
             $metaeval->evidencia=$ruta;
             $metaeval->save();
+
             return Response::json($metaeval);
          } 
         

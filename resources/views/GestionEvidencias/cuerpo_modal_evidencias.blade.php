@@ -23,7 +23,7 @@
     <label class ="btn btn-info" for="archivo_subido">
         <span id = "nombre_archivo">Subir Archivo</span>
     </label>
-    <input multiple = "true" style = "display:none" autocomplete="off" id="archivo_subido" class="form-control" type="file" name="archivo" accept=".pdf" required >
+    <input multiple = "true" style = "display:none" autocomplete="off" id="archivo_subido" class="form-control" type="file" name="archivo_subido" accept=".pdf" required >
 </div>
 
 <script>

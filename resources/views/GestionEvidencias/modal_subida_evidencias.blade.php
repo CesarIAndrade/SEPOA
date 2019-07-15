@@ -8,6 +8,7 @@
                 </button>
             </div>
                 <form id="formulario_subida_evidencias" files="true" role="form" enctype="multipart/form-data">    
+                {{csrf_field() }}
                 <div class="modal-body">
                     @include('GestionEvidencias.cuerpo_modal_evidencias')
                 </div>

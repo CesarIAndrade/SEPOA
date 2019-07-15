@@ -42,6 +42,10 @@ return [
     */
 
     'disks' => [
+     'ArchivosSubidos' => [
+           'driver' => 'local',
+            'root' => public_path('ArchivosSubidos'),
+        ],
 
 
      'imgNoticias' => [
