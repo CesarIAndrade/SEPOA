@@ -1,14 +1,22 @@
-@extends('layouts.app')
+@extends('layouts.gentela')
+@section('title')
+    Reportes
+@endsection
 @section('content')
+
+<div class="right_col" role="main">
+    <div class="container">
     @include('Reportes.prueba')
+    </div>
     <div class="container">
         <a href='reporteGenerate/Reportes.prueba/portrait' target="_blank" class="btn btn-outline-success">Generar como pdf</a>
     </div>
-    @include('Reportes.graficas')
     <div class="container">
-        <a href='reporteGenerate/Reportes.graficas/landscape' target="_blank" class="btn btn-outline-success">Generar como pdf</a>
+    @include('Reportes.graficas')
     </div>
-    <!-- <div class="container">
-        <iframe src="https://docs.google.com/viewer?url={{asset('reporteGenerate/Reportes.prueba')}}&embedded=true" width="600" height="780" style="border: none;"></iframe>
-    </div> -->
+    <div class="container">
+        
+    </div>
+</div>
+    
 @endsection

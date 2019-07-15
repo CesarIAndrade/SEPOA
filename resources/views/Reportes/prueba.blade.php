@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
+<!-- <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}"> -->
 <div class="container">
     <br>
     <br>
@@ -75,6 +75,3 @@
     <br>
     <br>
 </div>
-
-
-

@@ -1,37 +1,68 @@
-<!--Load the AJAX API-->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
+<script src="{{ asset('js/jspdf.js')}}"></script>
+<script src="{{ asset('js/Chart.js')}}"></script>
 
-      // Load the Visualization API and the corechart package.
-      google.charts.load('current', {'packages':['corechart']});
+<canvas id="myChart" style="background-color: #E85E40 ;" width="auto" height="auto"></canvas>
 
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.charts.setOnLoadCallback(drawChart);
+<button type="button" class="btn btn-outline-success" id="id_descargarGrafico" >
+            Generar como pdf
+        </button>
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    backgroundColor:'Red',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
 
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-      function drawChart() {
+$('#id_descargarGrafico').click(function (e) { 
+  downloadPDF();
+});
+//download pdf form hidden canvas
+function downloadPDF() {
+    var canvas = document.querySelector('#myChart');
+	//creates image
+    canvas.fillStyle = "red";
 
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
-        data.addRows([
-          ['Cumplido', 50],
-          ['Lo que se dijo cumplido', 100],
-          ['Futuro cumplimiento', 100]
-        ]);
+	var canvasImg = canvas.toDataURL("image/png", 1.0);
+  
+	//creates PDF from img
+	var doc = new jsPDF('landscape');
+	doc.setFontSize(20);
+	doc.text(15, 15, "Cool Chart");
+	doc.addImage(canvasImg, 'JPEG', 10, 10, 280, 150 );
+    window.open(doc.output('bloburl'));
+}
 
-        // Set chart options
-        var options = {'title':'Resumen del cumplimiento',
-                       'width':800,
-                       'height':600};
-
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    </script>
-    <!--Div that will hold the pie chart-->
-    <div id="chart_div"></div>
+</script>

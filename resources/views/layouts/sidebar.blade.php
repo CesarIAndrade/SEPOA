@@ -4,6 +4,7 @@
             <li><a href="periodo"><i class="fa fa-sliders"></i>Gestión de Periodos</a></li>
             <li><a href="evidencias"><i class="fa fa-archive"></i>Gestión de Evidencias</a></li>
             <li><a href="evaluacion_evidencias"><i class="fa fa-check-square"></i>Evaluación de Evidencias</a></li>
+            <li><a href="reporteP"><i class="fa fa-file-text"></i>Reportes</a></li>
         </ul>
     </div>
 </div>
