@@ -170,12 +170,12 @@ function llenar_fecha(){
 }
 
 function confirmacion_modal() {
-    alertify.confirm("This is a confirm dialog.",
+    alertify.confirm("¿¡Está Seguro?!",
     function(){
-        alertify.success('Ok');
+        alertify.success('Listo');
     },
     function(){
-        alertify.error('Cancel');
+        alertify.error('Listo');
     }
 );
 }
