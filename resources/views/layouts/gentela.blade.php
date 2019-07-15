@@ -14,6 +14,7 @@
     <script src="{{ asset('js/jquery-3.3.1.min.js')}}"></script>
     <script src="{{ asset('js/alertify.js') }}" defer></script>
 
+
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -33,6 +34,7 @@
     <link href="{{ asset('css/alertify.css') }}" rel="stylesheet">
     <link href="{{ asset('css/default.css') }}" rel="stylesheet">
     <link href="{{ asset('css/semantic.css') }}" rel="stylesheet">
+
 </head>
 
 <body class="nav-md">
@@ -90,7 +92,7 @@
     <!-- NProgress -->
     <script src="../vendors/nprogress/nprogress.js"></script>
     <!-- Chart.js -->
-    <script src="../vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- <script src="../vendors/Chart.js/dist/Chart.min.js"></script> -->
     <!-- gauge.js -->
     <script src="../vendors/gauge.js/dist/gauge.min.js"></script>
     <!-- bootstrap-progressbar -->

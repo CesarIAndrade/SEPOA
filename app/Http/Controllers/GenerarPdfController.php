@@ -18,6 +18,7 @@ class GenerarPDFController extends Controller
         // $date = date('Y-m-d');
         $view =  \View::make($ruta)->render();
         $pdf = \App::make('dompdf.wrapper');
+        // $pdf->loadHTML("<link rel='stylesheet' href='{{asset('css/bootstrap.css')}}'>");
         $pdf->loadHTML($view);
         $pdf->setPaper('A4', $tipo);
         return $pdf->stream('reporte');
