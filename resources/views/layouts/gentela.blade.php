@@ -33,7 +33,6 @@
     <link href="{{ asset('css/alertify.css') }}" rel="stylesheet">
     <link href="{{ asset('css/default.css') }}" rel="stylesheet">
     <link href="{{ asset('css/semantic.css') }}" rel="stylesheet">
-
 </head>
 
 <body class="nav-md">
@@ -90,8 +89,6 @@
     <script src="{{asset('vendors/fastclick/lib/fastclick.js')}}"></script>
     <!-- NProgress -->
     <script src="{{asset('vendors/nprogress/nprogress.js')}}"></script>
-    <!-- Chart.js -->
-    <!-- <script src="../vendors/Chart.js/dist/Chart.min.js"></script> -->
     <!-- gauge.js -->
     <script src="{{asset('vendors/gauge.js/dist/gauge.min.js')}}"></script>
     <!-- bootstrap-progressbar -->
