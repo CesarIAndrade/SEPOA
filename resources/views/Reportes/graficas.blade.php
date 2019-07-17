@@ -1,7 +1,7 @@
 <script src="{{ asset('js/jspdf.js')}}"></script>
 <script src="{{ asset('js/Chart.js')}}"></script>
 
-<canvas id="myChart" style="background-color: #E85E40 ;" width="auto" height="auto"></canvas>
+<canvas id="myChart" width="auto" height="auto"></canvas>
 
 <button type="button" class="btn btn-outline-success" id="id_descargarGrafico" >
             Generar como pdf
@@ -10,7 +10,6 @@
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'bar',
-    backgroundColor:'Red',
     data: {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
