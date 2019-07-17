@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <html lang="{{ app()->getLocale() }}">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -9,6 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="images/favicon.ico" type="image/ico" />
+    <link rel="stylesheet" href="css/home.css">
     <title>@yield('title', 'SEPOA')</title>
     <!-- JQuery -->
     <script src="{{ asset('js/jquery-3.3.1.min.js')}}"></script>
@@ -68,6 +70,7 @@
             @yield('content')
             <!-- page content -->
             <div class="right_col" role="main">
+
             </div>
             <!-- /page content -->
         </div>
@@ -119,4 +122,5 @@
     <!-- Custom Theme Scripts -->
     <script src="{{asset('build/js/custom.min.js')}}"></script>
 </body>
+
 </html>

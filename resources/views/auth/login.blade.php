@@ -33,11 +33,10 @@
                     {{ csrf_field() }}
                     <h1>Iniciar Sesión</h1>
                     <div>
-                        <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}"
-                            required autofocus>
+                        <input id="email" type="email" class="form-control" placeholder="Ingrese Usuario" name="email" value="{{ old('email') }}" required autofocus>
                     </div>
                     <div>
-                        <input id="password" type="password" class="form-control" name="password" required>
+                        <input id="password" type="password" class="form-control" placeholder="Ingrese Contraseña" name="password" required>
                     </div>
                     <div>
                         <button type="submit" class="btn btn-warning submit btn-block">Iniciar
