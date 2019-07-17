@@ -25,7 +25,7 @@
     justify-content: center;
     align-items: center;
     z-index: 1; 
-    transform: translateY(75px);
+    transform: translateY(10px);
 }
 
 .contain .card:hover .face.face1{
@@ -57,7 +57,7 @@
     align-items: center;
     padding: 20px;
     box-sizing: border-box;
-    transform: translateY(-75px);
+    transform: translateY(-140px);
 }
 
 .contain .card:hover .face.face2{
@@ -80,6 +80,6 @@
 }
 
 .contain .card .face.face2 .content a:hover{
-    background: #333;
+    background: #2A3F54;
     color: #fff;
 }
