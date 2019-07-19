@@ -7,6 +7,5 @@ Gestión de Periodos
     @include('GestionPeriodo.modal_periodo')
     @include('GestionPeriodo.tabla_periodo')
 </div>
-<!-- <script src='js/GestionPeriodo.js'></script> -->
-<script src='js/prueba.js'></script>
+<script src='js/GestionPeriodo.js'></script>
 @endsection
