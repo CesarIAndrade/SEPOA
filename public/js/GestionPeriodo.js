@@ -1,5 +1,6 @@
 var id_periodo, etapa_seleccionada, estado;
 $(document).ready(function () {
+    
     obtener_fecha_limite();
     llenar_fecha();
     listar_periodos();
@@ -14,14 +15,16 @@ $(document).ready(function () {
         etapa_seleccionada = $(this).val();
         estado = $(this).html();   
         marcar_dispositivos($(this));
+        // validar_fecha();
+        // crear_periodo();
     });
 
     // Modificar Campos para abrir periodo de evaluacion
-    $('#habilitar_periodo_de_evaluacion').click(function (e) {
-        e.preventDefault();
-        validar_fecha();
-        crear_periodo();
-    })
+    // $('#habilitar_periodo_de_evaluacion').click(function (e) {
+    //     e.preventDefault();
+    //     validar_fecha();
+    //     crear_periodo();
+    // })
 });
 
 function crear_periodo() {
@@ -91,7 +94,7 @@ function llenar_evaluacion_periodo() {
                 <td>'+ val.fecha_inicio + '</td>\
                 <td>'+ val.fecha_fin + '</td>\
                 <td>'+ val.etapa + '</td>\
-                <td><button type = "button" class="'+clase[0]+' seleccionado" id="etapa' + val.id + '" value="'+val.id+'" '+clase[2]+'>'+clase[1]+'</button></td></tr>'
+                <td><button type = "button" class="'+clase[0]+' seleccionado" onclick="confirmacion_modal()" id="etapa' + val.id + '" value="'+val.id+'" '+clase[2]+'>'+clase[1]+'</button></td></tr>'
             $('#tabla_evaluacion').append(etapa);
         });
     });
@@ -165,3 +168,16 @@ function llenar_fecha(){
     $('#id_md_fecha_inicio_periodo').attr('min', min);
     $('#id_md_fecha_inicio_periodo').val(min);
 }
+
+function confirmacion_modal() {
+    alertify.confirm("¿¡Está Seguro?!",
+    function(){
+        alertify.success('Listo');
+    },
+    function(){
+        alertify.error('Cancelado');
+    }
+);
+}
+
+
