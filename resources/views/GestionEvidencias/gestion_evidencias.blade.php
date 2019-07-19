@@ -3,7 +3,7 @@
 Gestión de Evidencias
 @endsection
 @section('content')
-<div class="right_col" role="main">
+<div class="right_col container-fluid" role="main">
     @include('GestionEvidencias.modal_subida_evidencias')
     @include('GestionEvidencias.tabla_metas_evidencias')
 </div>

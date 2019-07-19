@@ -3,7 +3,7 @@
 Gestión de Periodos
 @endsection
 @section('content')
-<div class="right_col" role="main">
+<div class="right_col container-fluid" role="main">
     @include('GestionPeriodo.modal_periodo')
     @include('GestionPeriodo.tabla_periodo')
 </div>
