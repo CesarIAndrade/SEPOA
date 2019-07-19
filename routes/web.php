@@ -64,3 +64,5 @@ Route::get('/reporteP', function () {
     return view('Reportes.principal');
 });
 Route::get('/reporteGenerate/{ruta}/{tipo}','GenerarPDFController@GenerarPDF');
+
+//Administrador visualizaciones
