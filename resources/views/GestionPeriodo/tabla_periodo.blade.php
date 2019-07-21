@@ -1,7 +1,8 @@
     <div class="row">
         <div class="x_panel">
             <div class="x_content">
-                <table class="table table-hover table-sm table-bordered">
+                <div class="table-responsive pre-scrollable">
+                <table class="table table-hover table-sm table-bordered table-responsive pre-scrollable ">
                     <thead class="bg-info text-light">
                         <tr>
                             <th scope="col">#</th>
@@ -17,6 +18,7 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
     </div>
