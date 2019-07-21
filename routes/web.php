@@ -68,3 +68,8 @@ Route::get('/reporteGenerate/{ruta}/{tipo}','GenerarPDFController@GenerarPDF');
 
 // Notificaciones
 Route::resource('/notificaciones', 'NotificacionesController');
+
+// Pusher
+Route::get('/pusher', function(){
+    return view('pusher');
+});
