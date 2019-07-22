@@ -102,11 +102,15 @@ function llenar_evaluacion_periodo() { //llena la tabla de las etapas de evaluac
     $.get("evaluacion_poaE/"+id_periodo, function (data) {
         $.each(data, function (index, val) {
             clase = crear_clase_para_etapa(val.estado);
+            var actividad='disabled';
             var etapa = '<tr id="etapa' + val.id + '">\
                 <td>'+ val.etapa + '</td>\
                 <td>'+ val.fecha_inicio + '</td>\
-                <td>'+ val.fecha_fin + '</td>\
-                <td><button type = "button" class="'+clase[0]+' seleccionado" onclick="confirmacion_modal2(etapaBtn' + val.id +')" id="etapaBtn' + val.id + '" value="'+val.id+'" '+clase[2]+'>'+clase[1]+'</button></td></tr>'
+                <td>'+ val.fecha_fin + '</td>'
+                if ((ComparacionDeFechas(val.fecha_fin,ObtenerFechaActual()))>=0) {
+                    actividad='';
+                }
+                etapa+='<td><button type = "button" class="'+clase[0]+' seleccionado" onclick="confirmacion_modal2(etapaBtn' + val.id +')" id="etapaBtn' + val.id + '" value="'+val.id+'" '+clase[2]+' '+actividad+'>'+clase[1]+'</button></td></tr>'
             $('#tabla_evaluacion').append(etapa);
         });
     });
@@ -168,12 +172,15 @@ function obtener_fecha_limite(id){//obtiene una fecha minima para la apertura de
                 $('#id_md_fecha_fin_periodo').attr('min', minim);
                 $('#id_md_fecha_fin_periodo').val(minim);
             }
-            console.log(minim2)
         }
     );
 }
-
-function reconstruirFecha(datosFecha){
+function ObtenerFechaActual() {//retorna la fecha actual del sistema
+    var fecha = new Date();
+    //fecha = f.getFullYear() + "-" + (reconstruirFecha(f.getMonth() +1)) + "-" +(reconstruirFecha(f.getDate())) + 'T' +(reconstruirFecha(f.getHours()))+":"+(reconstruirFecha(f.getMinutes())); 
+    return fecha
+}
+function reconstruirFecha(datosFecha){//arregla el formato de el cero antes de las fechas de un digito
     if((datosFecha) <= 9){
         return "0"+datosFecha;
     }
@@ -192,7 +199,7 @@ function confirmacion_modal2(id) { //Abre un modal para confirmar la apertura o 
 
 }
 
-function MostrarIngresoFechas() {
+function MostrarIngresoFechas() {//Mostrar u ocultar los cuadros de fechas segun se necesiten
     if(estado=="Habilitar"){
         $('#id_cuerpo_info').hide();
         $('#id_cuerpo_fechas').show();
@@ -202,6 +209,20 @@ function MostrarIngresoFechas() {
         $('#id_cuerpo_fechas').hide();
         $('#id_cuerpo_info').html("¿Desea cerrar la evaluación para esta etapa ahora mismo?");
     }
+}
+
+function ComparacionDeFechas(fecha11, fecha22) {
+    // var hoy = new Date();
+    var fecha1 = new Date(fecha11); // Define día y mes
+    var fecha2 = new Date(fecha22); // Define día y mes  
+    // finDeAnio.setFullYear(hoy.getFullYear()); // Define el año de este año
+    // var msPorDia = 24 * 60 * 60 * 1000; // Número de milisegundos por día
+    // var diasFaltantes = (finDeAnio.getTime() - hoy.getTime()) / msPorDia;
+    // var diasFaltantes = Math.round(daysLeft); //Regresa los días sobrantes en el año
+    var diasDif = fecha2.getTime() - fecha1.getTime();
+    //console.log(diasDif/(1000 * 60 * 60 * 24))
+    //var dias = Math.round(diasDif/(1000 * 60 * 60 * 24));
+    return (diasDif/(1000 * 60 * 60 * 24))
 }
 
 

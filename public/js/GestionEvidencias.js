@@ -52,9 +52,40 @@ $(document).ready(function () {
     })
     return valor
  }
- function GuardarArchivo() {
-     
- }
+ function ComparacionDeFechas(fecha11, fecha22) {//retorna la diferencia de dias de dos fechas
+    var fecha1 = new Date(fecha11); // Define día y mes
+    var fecha2 = new Date(fecha22); // Define día y mes  
+    var diasDif = fecha2.getTime() - fecha1.getTime();
+    return (diasDif/(1000 * 60 * 60 * 24))
+} 
+function ObtenerFechaActual() {//retorna la fecha actual del sistema
+    var fecha = new Date();
+    //fecha = f.getFullYear() + "-" + (reconstruirFecha(f.getMonth() +1)) + "-" +(reconstruirFecha(f.getDate())) + 'T' +(reconstruirFecha(f.getHours()))+":"+(reconstruirFecha(f.getMinutes())); 
+    return fecha
+}
+function reconstruirFecha(datosFecha){//arregla el formato de el cero antes de las fechas de un digito
+    if((datosFecha) <= 9){
+        return "0"+datosFecha;
+    }
+    else{
+        return	datosFecha;
+    }
+}
+function CrearSemaforización(fecha1, fecha2) {
+    var diferencia1=ComparacionDeFechas(fecha1,fecha2)
+    var diferencia2=ComparacionDeFechas(ObtenerFechaActual(),fecha2)
+    var porcentaje1,porcentaje2, fondo;
+    porcentaje1=diferencia1*0.4;
+    porcentaje2=diferencia1*0.2;
+    if (diferencia2>porcentaje1) {
+        fondo="bg-green";
+    }else if (diferencia2>porcentaje2) {
+        fondo="bg-orange";
+    }else{
+        fondo="bg-red";
+    }
+    return fondo;
+}
 function MostrarModalEvidencias(id, porcentaje) {
     $('#formulario_subida_evidencias').trigger('reset');
     $('#nombre_archivo').text('Subir Archivo');
@@ -103,7 +134,8 @@ function GargarTodo() {
                             dataType: 'json',
                         })
                         .done(function(valorMeta) {
-                            var periodo = '<tr id="metaeval' + MetasE.idmeta_evaluacion + '">\
+                            var fondo=CrearSemaforización(poaA.fecha_inicio_evaluacion,poaA.fecha_fin_evaluacion)
+                            var periodo = '<tr id="metaeval' + MetasE.idmeta_evaluacion + '" class="'+fondo+'">\
                             <td>'+ c + '</td>\
                             <td class="text-success">Activa</td>\
                             <td>'+ valorMeta.descripcion + '</td>\
