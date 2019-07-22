@@ -171,13 +171,13 @@ function llenar_fecha(){
 
 function confirmacion_modal() {
     alertify.confirm("¿¡Está Seguro?!",
-    function(){
-        alertify.success('Listo');
-    },
-    function(){
-        alertify.error('Cancelado');
-    }
-);
+        function(){
+            alertify.success('Listo');
+        },
+        function(){
+            alertify.error('Cancelado');
+        }
+    );
 }
 
 

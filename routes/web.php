@@ -21,7 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Gestion de evidencias
 Route::get('/evidencias', function () {
     return view('GestionEvidencias.gestion_evidencias');
-})->middleware('auth');;
+})->middleware('auth');
 Route::resource('/evidencia', 'MetaEvaluacionController');
 Route::get('/MetaEvaluacion/{id}', 'MetaEvaluacionController@ObtenerEvaluacion');
 Route::post('/subirEvidencia/{id}', 'MetaEvaluacionController@GuardarArchivo');
