@@ -104,16 +104,24 @@ class EvaluacionPoaController extends Controller
     }
     
     public function actualizar_periodo_evaluacion(Request $request, $id){
+        //dd($request);
         $evaluacion_poa = EvaluacionPoa::find($id);
-        $evaluacion_poa->fecha_inicio_evaluacion = $request->fecha_inicio_evaluacion;
-        $evaluacion_poa->fecha_fin_evaluacion = $request->fecha_fin_evaluacion;
         if($request->estado == 'Habilitar'){
             $evaluacion_poa->estado = 'D';
+            $evaluacion_poa->fecha_inicio_evaluacion = $request->fecha_inicio_evaluacion;
+            $evaluacion_poa->fecha_fin_evaluacion = $request->fecha_fin_evaluacion;
         }
         elseif($request->estado == 'Deshabilitar'){
             $evaluacion_poa->estado = 'H';
+            $evaluacion_poa->fecha_fin_evaluacion = $request->fecha_fin_evaluacion;
         }
-        // $evaluacion_poa->save();
+        $evaluacion_poa->save();
         return response::json($evaluacion_poa);
+    }
+
+    public function obtenerEtapasPeriodos($id)
+    {
+        $informacion=EvaluacionPoa::where('id_poa', $id) ->get();
+        return Response::json($informacion);
     }
 }

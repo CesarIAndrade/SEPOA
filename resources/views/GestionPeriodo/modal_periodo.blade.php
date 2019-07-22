@@ -1,4 +1,4 @@
-<div class="modal fade modal_gestion_periodos" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id = "modal_apertura_periodo">
+<div data-backdrop="static" data-keyboard="false" class="modal fade modal_gestion_periodos" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id = "modal_apertura_periodo">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,9 +8,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                @include('GestionPeriodo.cuerpo_modal_periodo')
                 @include('GestionPeriodo.tabla_evaluacion')
-                <!-- @include('GestionPeriodo.modal_de_confirmacion') -->
+                @include('GestionPeriodo.modal_de_confirmacion')
             </div>
         </div>
     </div>

@@ -1,23 +1,35 @@
 var id_periodo, etapa_seleccionada, estado;
 $(document).ready(function () {
     
-    obtener_fecha_limite();
-    llenar_fecha();
+    //llenar_fecha();
     listar_periodos();
     $('body').on('click', '.abrir_modal', function () {
         id_periodo = $(this).val();
         llenar_evaluacion_periodo();
+        $('#id_info_apertura_periodos').html('Etapas de evaluacion para el periodo '+$('#descripcion'+id_periodo).html());
         $('#modal_apertura_periodo').modal('show');
     })
-
-    // Ubicar periodo de evaluacion seleecionado
-    $('#tabla_evaluacion').on('click', '.seleccionado', function () {
-        etapa_seleccionada = $(this).val();
-        estado = $(this).html();   
-        marcar_dispositivos($(this));
-        // validar_fecha();
-        // crear_periodo();
+    $('#id_cancelar_accion_periodo').click(function (e) { 
+        alertify.error("Cancelado");
+        $('#modal_de_confirmacion').modal("hide");
+        $('#modal_de_confirmacion').trigger('reset');
     });
+    $('#id_cerrar_accion_periodo').click(function (e) { 
+        alertify.error("Cancelado");
+        $('#modal_de_confirmacion').modal("hide");
+        $('#modal_de_confirmacion').trigger('reset');
+    });
+    $('#id_confirmar_accion_periodo').click(function (e) { 
+        e.preventDefault();
+        // validar_fecha();
+        crear_periodo(etapa_seleccionada,estado);
+        $('#modal_de_confirmacion').trigger('reset');
+    });
+    // Ubicar periodo de evaluacion seleecionado
+    // $('#tabla_evaluacion').on('click', '.seleccionado', function () {
+    //     // validar_fecha();
+    //     // crear_periodo();
+    // });
 
     // Modificar Campos para abrir periodo de evaluacion
     // $('#habilitar_periodo_de_evaluacion').click(function (e) {
@@ -27,7 +39,7 @@ $(document).ready(function () {
     // })
 });
 
-function crear_periodo() {
+function crear_periodo(etapa_seleccionada,estado) {
     var c = 1;
     $.ajaxSetup({
         headers: {
@@ -35,10 +47,11 @@ function crear_periodo() {
         }
     });
     var formData = {
-        fecha_inicio_evaluacion: $('#id_md_fecha_ini_periodo').val(),
+        fecha_inicio_evaluacion: $('#id_md_fecha_inicio_periodo').val(),
         fecha_fin_evaluacion: $('#id_md_fecha_fin_periodo').val(),
         estado: estado,
     }
+    console.log($('#id_md_fecha_inicio_periodo').val())
     $.ajax({
         type: "PUT",
         url: "periodo/" + etapa_seleccionada,
@@ -47,23 +60,23 @@ function crear_periodo() {
         success: function (val) {
             clase = crear_clase_para_etapa(val.estado);
             var etapa = '<tr id="etapa' + val.id + '">\
-                <td>'+ c++ + '</td>\
+                <td>'+ val.etapa + '</td>\
                 <td>'+ val.fecha_inicio + '</td>\
                 <td>'+ val.fecha_fin + '</td>\
-                <td>'+ val.etapa + '</td>\
-                <td><button type = "button" class="'+clase[0]+' seleccionado" id="etapa' + val.id + '" value="' + val.id + '" '+clase[2]+'>'+clase[1]+'</button></td></tr>'
+                <td><button type = "button" class="'+clase[0]+' seleccionado" onclick="confirmacion_modal2(etapaBtn' + val.id +')" id="etapaBtn' + val.id + '" value="' + val.id + '" '+clase[2]+'>'+clase[1]+'</button></td></tr>'
             $('#etapa' + val.id).replaceWith(etapa);
             $('#modal_apertura_periodo').trigger('reset');
             $('#id_md_fecha_fin_periodo').val('');
-            document.getElementById('id_md_fecha_fin_periodo').disabled = true;
+            alertify.success("Realizado");
+            $('#modal_de_confirmacion').modal("hide");
         },
         error: function (val) {
-            console.log('Error:', val)
+            alertify.error('Error en la petición');
         }
     });
 }
 
-function listar_periodos() {
+function listar_periodos() {//llena la tabla con todos los periodos 
     $('#tabla_lista_metas_evidencias').html('');
     var c = 1;
     $.get("periodos",
@@ -72,7 +85,7 @@ function listar_periodos() {
                 id_periodo = val.id;
                 var periodo = '<tr id="periodo' + val.id + '">\
                 <td>'+ c++ + '</td>\
-                <td>'+ val.descripcion + '</td>\
+                <td id="descripcion'+ val.id + '">'+ val.descripcion + '</td>\
                 <td>'+ val.fecha_inicio + '</td>\
                 <td>'+ val.fecha_fin + '</td>\
                 <td>'+ val.estado + '</td>\
@@ -83,101 +96,112 @@ function listar_periodos() {
     );
 }
 
-function llenar_evaluacion_periodo() {
+function llenar_evaluacion_periodo() { //llena la tabla de las etapas de evaluacion
     $('#tabla_evaluacion').html('');
     var c = 1;
-    $.get("evaluacion_poa", function (data) {
+    $.get("evaluacion_poaE/"+id_periodo, function (data) {
         $.each(data, function (index, val) {
             clase = crear_clase_para_etapa(val.estado);
             var etapa = '<tr id="etapa' + val.id + '">\
-                <td>'+ c++ + '</td>\
+                <td>'+ val.etapa + '</td>\
                 <td>'+ val.fecha_inicio + '</td>\
                 <td>'+ val.fecha_fin + '</td>\
-                <td>'+ val.etapa + '</td>\
-                <td><button type = "button" class="'+clase[0]+' seleccionado" onclick="confirmacion_modal()" id="etapa' + val.id + '" value="'+val.id+'" '+clase[2]+'>'+clase[1]+'</button></td></tr>'
+                <td><button type = "button" class="'+clase[0]+' seleccionado" onclick="confirmacion_modal2(etapaBtn' + val.id +')" id="etapaBtn' + val.id + '" value="'+val.id+'" '+clase[2]+'>'+clase[1]+'</button></td></tr>'
             $('#tabla_evaluacion').append(etapa);
         });
     });
 }
 
-function crear_clase_para_etapa(estado) {
-    if (estado == 'H') {
+function crear_clase_para_etapa(estado) {//llena un arreglo para controlar las clases de llenado en la tabla
+    if (estado == 'H') {                 //etapas de evaluacion
         var arreglo = ['btn btn-success', 'Habilitar', '']
         return arreglo;
     }
     else if (estado == 'D') {
-        var arreglo = ['btn btn-danger', 'Deshabilitar', '','E']
+        var arreglo = ['btn btn-danger', 'Deshabilitar', '']
+        return arreglo;
+    }else if(estado == 'E'){
+        var arreglo = ['btn btn-success', 'Evaluado','disabled']
         return arreglo;
     }
 }
 
-function marcar_dispositivos(objeto){
-    if($(objeto).hasClass('btn btn-danger')){
+function marcar_periodos(objeto){//Cambia las clases de los botones de habilitar o deshabilitar que se seleccionen
+    // if($(objeto).hasClass('btn btn-danger')){
+    //     $(objeto).removeClass('btn btn-danger');
+    //     $(objeto).addClass('btn btn-info');
+    //     document.getElementById('id_md_fecha_fin_periodo').disabled = true;
+    // }
+    // else if($(objeto).hasClass('btn btn-success')){
+    //     $(objeto).removeClass('btn btn-success');
+    //     $(objeto).addClass('btn btn-info');
+    //     document.getElementById('id_md_fecha_fin_periodo').disabled = false;
+    // }
+    // else 
+    if($(objeto).hasClass('btn btn-danger') && $(objeto).html() == 'Habilitar'){
         $(objeto).removeClass('btn btn-danger');
-        $(objeto).addClass('btn btn-info');
-        document.getElementById('id_md_fecha_fin_periodo').disabled = true;
-    }
-    else if($(objeto).hasClass('btn btn-success')){
-        $(objeto).removeClass('btn btn-success');
-        $(objeto).addClass('btn btn-info');
-        document.getElementById('id_md_fecha_fin_periodo').disabled = false;
-    }
-    else if($(objeto).hasClass('btn btn-info') && $(objeto).html() == 'Habilitar'){
-        $(objeto).removeClass('btn btn-info');
         $(objeto).addClass('btn btn-success');
-        document.getElementById('id_md_fecha_fin_periodo').disabled = true;
+        // 
     }
-    else if($(objeto).hasClass('btn btn-info') && $(objeto).html() == 'Deshabilitar'){
-        $(objeto).removeClass('btn btn-info');
+    else if($(objeto).hasClass('btn btn-success') && $(objeto).html() == 'Deshabilitar'){
+        $(objeto).removeClass('btn btn-success');
         $(objeto).addClass('btn btn-danger');
     }
 }
 
-function obtener_fecha_limite(){
-    var f = new Date();
-    var min = f.getFullYear() + '-01-01T00:00'
-    var max = f.getFullYear() + '-12-31T23:59';
-    $('#id_md_fecha_fin_periodo').attr('min', min);
-    $('#id_md_fecha_fin_periodo').attr('max', max);
-}
-
-function validar_fecha(){
-    let fecha_inicio = new Date($('#id_md_fecha_inicio_periodo').val());
-    let fecha_fin = new Date($('#id_md_fecha_fin_periodo').val());
-    if(fecha_fin.getDate() <= fecha_inicio.getDate()){
-        alert('fecha incorrecta');
-        $('#id_md_fecha_fin_periodo').val('');
-    }
-    else if((fecha_fin.getMonth()+1) < (fecha_inicio.getMonth()+1)){
-        alert('fecha incorrecta');
-        $('#id_md_fecha_fin_periodo').val('');
-    }
-}
-
-function llenar_fecha(){
-    var f = new Date();
-    var min;
-    if((f.getMonth()+1) <= 9){
-        // min = f.getFullYear() + "-0" + (f.getMonth() +1) + "-" + f.getDate() + 'T00:00';
-        min = f.getFullYear() + "-0" + (f.getMonth() +1) + "-" + f.getDate() + 'T' +f.getHours()+":"+f.getMinutes()+":"+f.getSeconds(); 
-    }
-    else{
-        // min = f.getFullYear() + "-" + (f.getMonth() +1) + "-" + f.getDate() + 'T00:00';
-        min = f.getFullYear() + "-" + (f.getMonth() +1) + "-" + f.getDate() + 'T' +f.getHours()+":"+f.getMinutes()+":"+f.getSeconds(); 
-    }
-    $('#id_md_fecha_inicio_periodo').attr('min', min);
-    $('#id_md_fecha_inicio_periodo').val(min);
-}
-
-function confirmacion_modal() {
-    alertify.confirm("¿¡Está Seguro?!",
-        function(){
-            alertify.success('Listo');
-        },
-        function(){
-            alertify.error('Cancelado');
+function obtener_fecha_limite(id){//obtiene una fecha minima para la apertura de los periodos de evaluacion
+    var minim, minim2;
+    $.get("evaluacion_poas/"+id,
+        function (data) {
+            var fechaObtenida = new Date(data.fecha_fin);
+            minim = (fechaObtenida.getFullYear())+'-'+(reconstruirFecha(fechaObtenida.getMonth()+1))+'-'+(reconstruirFecha(fechaObtenida.getDate()+1))+ 'T23:59:59';
+            var f = new Date();
+            minim2 = f.getFullYear() + "-" + (reconstruirFecha(f.getMonth() +1)) + "-" +(reconstruirFecha(f.getDate())) + 'T' +(reconstruirFecha(f.getHours()))+":"+(reconstruirFecha(f.getMinutes())); 
+            if(minim<minim2){
+                $('#id_md_fecha_inicio_periodo').attr('min', minim2);
+                $('#id_md_fecha_inicio_periodo').val(minim2);
+                $('#id_md_fecha_fin_periodo').attr('min', minim2);
+                $('#id_md_fecha_fin_periodo').val(minim2);
+            }else{
+                $('#id_md_fecha_inicio_periodo').attr('min', minim);
+                $('#id_md_fecha_inicio_periodo').val(minim);
+                $('#id_md_fecha_fin_periodo').attr('min', minim);
+                $('#id_md_fecha_fin_periodo').val(minim);
+            }
+            console.log(minim2)
         }
     );
+}
+
+function reconstruirFecha(datosFecha){
+    if((datosFecha) <= 9){
+        return "0"+datosFecha;
+    }
+    else{
+        return	datosFecha;
+    }
+}
+function confirmacion_modal2(id) { //Abre un modal para confirmar la apertura o cierre de un periodo manualmente
+    marcar_periodos($(id))
+    // llenar_fecha();
+    obtener_fecha_limite($(id).val());
+    etapa_seleccionada = $(id).val();
+    estado = $(id).html();   
+    MostrarIngresoFechas();
+    $('#modal_de_confirmacion').modal("show");
+
+}
+
+function MostrarIngresoFechas() {
+    if(estado=="Habilitar"){
+        $('#id_cuerpo_info').hide();
+        $('#id_cuerpo_fechas').show();
+    }
+    else if(estado=="Deshabilitar"){
+        $('#id_cuerpo_info').show();
+        $('#id_cuerpo_fechas').hide();
+        $('#id_cuerpo_info').html("¿Desea cerrar la evaluación para esta etapa ahora mismo?");
+    }
 }
 
 

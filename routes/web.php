@@ -36,9 +36,10 @@ Route::resource('/periodos', 'PeriodoController');
 
 // Evaluacion Periodos
 Route::resource('/evaluacion_poa', 'EvaluacionPoaController');
+Route::get('poaActivos','EvaluacionPoaController@obtenerActivos');
 Route::put('/periodo/{id}', 'EvaluacionPoaController@actualizar_periodo_evaluacion');
 Route::get('evaluacion_poas/{id}','EvaluacionPoaController@BuscarPeriodo');
-Route::get('poaActivos','EvaluacionPoaController@obtenerActivos');
+Route::get('evaluacion_poaE/{id}','EvaluacionPoaController@obtenerEtapasPeriodos');
 
 // Indicadores
 Route::resource('/indicador', 'IndicadoresController');

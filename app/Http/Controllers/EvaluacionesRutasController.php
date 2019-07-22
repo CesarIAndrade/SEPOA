@@ -93,7 +93,7 @@ class EvaluacionesRutasController extends Controller
     }
     public function ObtenerEvaluaciones()
     {
-        $users = DB::table('evaluacion_poa')
+        $informacion = DB::table('evaluacion_poa')
             ->join('meta_evaluacion', 'evaluacion_poa.id', '=', 'meta_evaluacion.id_evaluacion')
             ->join('meta', 'meta_evaluacion.idmeta_evaluacion', '=', 'meta.idmetas')
             ->select('evaluacion_poa.estado','evaluacion_poa.fecha_inicio',
@@ -101,6 +101,6 @@ class EvaluacionesRutasController extends Controller
                         'meta_evaluacion.idmeta_evaluacion','meta_evaluacion.porcentaje_evaluado',
                         'meta_evaluacion.evidencia')
             ->get();
-        return response::json($users);
+        return response::json($informacion);
     }
 }
