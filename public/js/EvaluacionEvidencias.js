@@ -97,7 +97,7 @@ function CargarPeriodosActivos() {
                 valor3='Evaluado'
                 valor4='text-success'
             }
-            if(elemento.evidencia=='null'||elemento.evidencia==''){
+            if(elemento.evidencia==null||elemento.evidencia==''){
                 valor='No disponible'
                 valor3='No evaluable'
                 valor2='disabled'
