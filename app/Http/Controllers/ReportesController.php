@@ -26,7 +26,7 @@ class ReportesController extends Controller
                 ->orderby('area_proyecto.nombre')
                 ->select('area_proyecto.nombre as area',
                         'meta_evaluacion.porcentaje',
-                        'meta_evaluacion.porcentaje_evaluado',)
+                        'meta_evaluacion.porcentaje_evaluado')
                 ->get();
         return response::json($area);
     }
