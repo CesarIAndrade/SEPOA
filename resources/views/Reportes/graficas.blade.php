@@ -3,6 +3,7 @@
     <select class="form-control " id="id_seleccion_periodos">
       
     </select>
-  </div>
+</div>
+<br>
 <canvas id="grafica_estadistica" width="auto" height="auto"></canvas>
 <script src="{{ asset('js/ReportesWeb.js')}}"></script>
