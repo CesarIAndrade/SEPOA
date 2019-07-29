@@ -60,6 +60,13 @@ Route::get('/evaluacion_evidencias', function () {
 // EvaluacionMetas para llenar la tabla
 Route::get('/evaluacionRutas', 'EvaluacionesRutasController@ObtenerEvaluaciones');
 
+//Obtiene las areas y su repectivo porcentaje de cumplimiento
+Route::get('/obtenerAreas', 'ReportesController@ObtenerArea');
+
+//Obtiene las los periodos y sus repectivos porcentajes de cumplimiento
+Route::get('/obtenerPorcentaje/{id}', 'ReportesController@ObtenerPorcentajePeriodos');
+
+
 // Reportes
 Route::get('/reporteP', function () {
     return view('Reportes.principal');
@@ -73,3 +80,6 @@ Route::resource('/notificaciones', 'NotificacionesController');
 Route::get('/pusher', function(){
     return view('pusher');
 });
+Route::get('/estadistica_cumplimiento', function () {
+    return view('Reportes.principal_reportes_web');
+})->middleware('auth');;

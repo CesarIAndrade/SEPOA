@@ -212,16 +212,9 @@ function MostrarIngresoFechas() {//Mostrar u ocultar los cuadros de fechas segun
 }
 
 function ComparacionDeFechas(fecha11, fecha22) {
-    // var hoy = new Date();
     var fecha1 = new Date(fecha11); // Define día y mes
     var fecha2 = new Date(fecha22); // Define día y mes  
-    // finDeAnio.setFullYear(hoy.getFullYear()); // Define el año de este año
-    // var msPorDia = 24 * 60 * 60 * 1000; // Número de milisegundos por día
-    // var diasFaltantes = (finDeAnio.getTime() - hoy.getTime()) / msPorDia;
-    // var diasFaltantes = Math.round(daysLeft); //Regresa los días sobrantes en el año
     var diasDif = fecha2.getTime() - fecha1.getTime();
-    //console.log(diasDif/(1000 * 60 * 60 * 24))
-    //var dias = Math.round(diasDif/(1000 * 60 * 60 * 24));
     return (diasDif/(1000 * 60 * 60 * 24))
 }
 

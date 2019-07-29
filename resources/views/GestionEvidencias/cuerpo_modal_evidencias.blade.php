@@ -2,13 +2,13 @@
     <div class="col-md-6">
         <div class="form-group has-feedback">
             <label for="id_porcentaje_esperado">{{ __('Porcentaje esperado') }}</label>
-            <input id="id_porcentaje_esperado"  value="" type="text" class="form-control" disabled>
+            <input id="id_porcentaje_esperado"  value="" type="number" min="0" max="100" class="form-control" disabled>
         </div>
     </div>
     <div class="col-md-6">
         <div class="form-group has-feedback">
             <label for="id_porcentaje_cumplido">{{ __('Porcentaje cumplido') }}</label>
-            <input autocomplete="off" name="porcentaje_cumplido" id="id_porcentaje_cumplido" value="" type="text" class="form-control" required autofocus>
+            <input autocomplete="off" name="porcentaje_cumplido" id="id_porcentaje_cumplido" value="" type="number" min="0" max="100" class="form-control" required autofocus>
         </div>
     </div>
     <div class="col-md-12" id="contenido_evidencia">
@@ -21,6 +21,7 @@
 
 <div class="form-div" id="id_evidencias" style = "display:flex; justify-content: flex-end;">
     <label class ="btn btn-info" for="archivo_subido">
+        <i class="fa fa-file-pdf-o"></i>
         <span id = "nombre_archivo">Subir Archivo</span>
     </label>
     <input multiple = "true" style = "display:none" autocomplete="off" id="archivo_subido" class="form-control" type="file" name="archivo_subido" accept=".pdf" required >

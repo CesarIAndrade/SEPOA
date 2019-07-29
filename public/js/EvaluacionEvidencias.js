@@ -111,10 +111,7 @@ function CargarPeriodosActivos() {
             <td class="'+valor4+'">'+valor3+'</td>\
             <td>'+ elemento.descripcion + '</td>\
             <td>'+ elemento.fecha_inicio + '</td>\
-            <td>'+ elemento.fecha_fin + '</td>'
-
-
-            
+            <td>'+ elemento.fecha_fin + '</td>'            
             periodo+='<td>'+valor+'</td>\
             <td><button '+valor2+' class="btn btn-info" id="metaeva'+elemento.idmeta_evaluacion+'" onClick="MostrarEvaluacion('+elemento.idmeta_evaluacion+','+elemento.porcentaje_cumplido+')">Revisar</button></td>\
             </tr>'

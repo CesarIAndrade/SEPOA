@@ -91,6 +91,15 @@ class EvaluacionesRutasController extends Controller
     {
         //
     }
+
+    // public function ObtenerArea($id){
+    //     $area = DB::table('proyectos')
+    //             ->where('id_periodo_poa', $id)
+    //             ->join('area_proyecto', 'proyectos.idAreaPoa', '=', 'area_proyecto.id_area_proyecto')
+    //             ->select('*')
+    //             ->get();
+    //     return response::json($area);
+    // }
     public function ObtenerEvaluaciones()
     {
         $informacion = DB::table('evaluacion_poa')
@@ -99,7 +108,7 @@ class EvaluacionesRutasController extends Controller
             ->select('evaluacion_poa.estado','evaluacion_poa.fecha_inicio',
                         'evaluacion_poa.fecha_fin', 'meta.descripcion',
                         'meta_evaluacion.idmeta_evaluacion','meta_evaluacion.porcentaje_evaluado',
-                        'meta_evaluacion.evidencia')
+                        'meta_evaluacion.evidencia','evaluacion_poa.id_poa')
             ->get();
         return response::json($informacion);
     }

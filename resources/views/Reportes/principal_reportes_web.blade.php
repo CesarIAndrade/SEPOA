@@ -6,17 +6,17 @@
 
 <div class="right_col" role="main">
     <div class="container">
-    @include('Reportes.prueba')
+    @include('Reportes.estadistico_areas_periodos')
     </div>
-    <div class="container">
+    <!-- <div class="container">
         <a href='reporteGenerate/Reportes.prueba/portrait' target="_blank" class="btn btn-outline-success">Generar como pdf</a>
-    </div>
+    </div> -->
     <div class="container">
     @include('Reportes.graficas')
     </div>
-    <div class="container">
+    <!-- <div class="container">
         
-    </div>
+    </div> -->
 </div>
     
 @endsection

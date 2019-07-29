@@ -39,6 +39,7 @@
 </head>
 
 <body class="nav-md">
+    <input type="hidden" id="user_information" value="{{ Auth::user()->id }}">
     <div class="container body">
         <div class="main_container">
             <div class="col-md-3 left_col">
@@ -50,7 +51,7 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                            <img src="images/img2.jpg" alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Bienvenido</span>

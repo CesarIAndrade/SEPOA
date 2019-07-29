@@ -1,5 +1,7 @@
+var userid;
 
 $(document).ready(function () {
+    userid = $('#user_information').val();
     GargarTodo()
     $(document).on("submit","#formulario_subida_evidencias",function (e) {
         e.preventDefault()
@@ -9,7 +11,6 @@ $(document).ready(function () {
             }
         });
         var formData = new FormData($(this)[0]);
-        console.log(formData)
         var id=$(this).val()
         $.ajax({
             type: "POST",
@@ -23,7 +24,7 @@ $(document).ready(function () {
                 alertify.success('Evidencia almacenada correctamente');
             },
             error: function (val) {
-                console.log('Error:', val)
+                alertify.error('Se ha producido un error en la petición');
             }
         });
         $('#formulario_subida_evidencias').trigger('reset');
@@ -47,7 +48,7 @@ $(document).ready(function () {
        valor=datos
     })
     .fail(function() {
-        console.log("error");
+        alertify.error('Se ha producido un error en la petición');
         valor=null
     })
     return valor
@@ -134,20 +135,22 @@ function GargarTodo() {
                             dataType: 'json',
                         })
                         .done(function(valorMeta) {
-                            var fondo=CrearSemaforización(poaA.fecha_inicio_evaluacion,poaA.fecha_fin_evaluacion)
-                            var periodo = '<tr id="metaeval' + MetasE.idmeta_evaluacion + '" class="'+fondo+'">\
-                            <td>'+ c + '</td>\
-                            <td class="text-success">Activa</td>\
-                            <td>'+ valorMeta.descripcion + '</td>\
-                            <td>'+ poaA.fecha_inicio_evaluacion + '</td>\
-                            <td>'+ poaA.fecha_fin_evaluacion + '</td>\
-                            <td><button class="btn btn-info upload_evd" id="metaeva'+MetasE.idmeta_evaluacion+'" onClick="MostrarModalEvidencias('+MetasE.idmeta_evaluacion+','+MetasE.porcentaje+')">Evidencia</button></td></tr>'
-    
-                            $('#tabla_lista_metas_evidencias').append(periodo);
-                            c++
+                            if(valorMeta.id_responsable==userid){
+                                var fondo=CrearSemaforización(poaA.fecha_inicio_evaluacion,poaA.fecha_fin_evaluacion)
+                                var periodo = '<tr id="metaeval' + MetasE.idmeta_evaluacion + '" class="'+fondo+'">\
+                                <td>'+ c + '</td>\
+                                <td class="text-success">Activa</td>\
+                                <td>'+ valorMeta.descripcion + '</td>\
+                                <td>'+ poaA.fecha_inicio_evaluacion + '</td>\
+                                <td>'+ poaA.fecha_fin_evaluacion + '</td>\
+                                <td><button class="btn btn-info upload_evd" id="metaeva'+MetasE.idmeta_evaluacion+'" onClick="MostrarModalEvidencias('+MetasE.idmeta_evaluacion+','+MetasE.porcentaje+')">Evidencia</button></td></tr>'
+                                
+                                $('#tabla_lista_metas_evidencias').append(periodo);
+                                c++
+                            }
                         })
                         .fail(function() {
-                            console.log("error");
+                            alertify.error('Se ha producido un al mostrar las metas');
                             valor=null
                         })
                     });
