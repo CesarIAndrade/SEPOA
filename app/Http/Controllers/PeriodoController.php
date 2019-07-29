@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Periodo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Response;
 
 class PeriodoController extends Controller
@@ -16,7 +17,7 @@ class PeriodoController extends Controller
     public function index()
     {
         //
-        $periodos = Periodo::all();
+        $periodos = DB::table('periodo_poa')->orderby('periodo_poa.descripcion')->get();
         return response::json($periodos);
     }
 

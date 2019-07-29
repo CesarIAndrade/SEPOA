@@ -13,7 +13,7 @@ class ReportesController extends Controller
         $this->middleware('auth');
     }
 
-    public function ObtenerArea(){
+    public function ObtenerArea($id){
         $area = DB::table('area_proyecto')
                 // ->where('area_proyecto.id_area_proyecto',$id)
                 ->join('proyectos', 'proyectos.idAreaPoa', '=', 'area_proyecto.id_area_proyecto')
@@ -22,11 +22,13 @@ class ReportesController extends Controller
                 ->join('meta_evaluacion','meta_evaluacion.id_meta','=','meta.idmetas')
                 ->join('evaluacion_poa', 'evaluacion_poa.id', '=', 'meta_evaluacion.id_evaluacion')
                 ->join('periodo_poa', 'periodo_poa.id', '=', 'evaluacion_poa.id_poa')
-                ->where('evaluacion_poa.estado','E')
+                ->where('evaluacion_poa.estado','E')->where('evaluacion_poa.id_poa',$id)
                 ->orderby('area_proyecto.nombre')
                 ->select('area_proyecto.nombre as area',
                         'meta_evaluacion.porcentaje',
-                        'meta_evaluacion.porcentaje_evaluado',)
+                        'meta_evaluacion.porcentaje_evaluado',
+                        'periodo_poa.id as id_periodo_poa'
+                        )
                 ->get();
         return response::json($area);
     }
