@@ -2,12 +2,15 @@ var areas = [];
 var porcentajes = [];
 var colores = [];
 var periodosMuestra;
+var periodosInfo=[];
+var porcentajesPeriodos=[];
+var coloresPeriodos=[];
 $(document).ready(function () {
     llenarSelect();
     $('#id_seleccion_periodos').change(function (e) { 
         llenarGrafica($('#id_seleccion_periodos').val());
     });
-    
+    llenarGraficaPeriodos();    
 });
 function llenarSelect() {//llena el select con los periodos exixtentes
     $.ajax({
@@ -111,6 +114,84 @@ function llenarGrafica(id_periodo) {
         }
     });
 }
+function llenarGraficaPeriodos() {
+    periodosInfo=[];
+    porcentajesPeriodos=[];
+    coloresPeriodos=[];
+    var auxPeriodo, auxPorcentaje;
+    var contador=0;
+    $.ajax({
+        type: "get",
+        url: "obtenerPorcentaje",
+        dataType: "json",
+        success: function (response) {
+            if(response.length!=0){
+                $('#grafica_estadistica_periodos').show();
+                $.each(response, function (index, value) { 
+                    if (index==0) {
+                        contador++;
+                        auxPorcentaje=porcentajeDosValores(value.porcentaje, value.porcentaje_evaluado)
+                        auxPeriodo=value.periodo;
+                    }else if(auxPeriodo==value.periodo){
+                        if(response.length-1==index){
+                            coloresPeriodos.push(getRandomColor());
+                            auxPorcentaje+=porcentajeDosValores(value.porcentaje, value.porcentaje_evaluado)
+                            contador++;
+                            porcentajesPeriodos.push(auxPorcentaje/contador);
+                            periodosInfo.push(auxPeriodo);
+                        }else{
+                            contador++;
+                            auxPeriodo=value.periodo;
+                            auxPorcentaje+=porcentajeDosValores(value.porcentaje, value.porcentaje_evaluado)
+                        }
+                    }else if(auxPeriodo!=value.periodo){
+                        coloresPeriodos.push(getRandomColor());
+                        porcentajesPeriodos.push(auxPorcentaje/contador);
+                        periodosInfo.push(auxPeriodo);
+                        auxPorcentaje=0;
+                        contador=0;
+                        auxPeriodo=value.periodo;
+                        auxPorcentaje+=porcentajeDosValores(value.porcentaje, value.porcentaje_evaluado)
+                        contador++;
+                    }
+                });
+                $('#grafica_estadistica_periodos').html('');
+                var ctx = document.getElementById('grafica_estadistica_periodos').getContext('2d');
+                if (window.graficaPeriodos) {
+                    window.graficaPeriodos.clear();
+                    window.graficaPeriodos.destroy();
+                }
+                window.graficaPeriodos = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: periodosInfo,
+                        datasets: [{
+                            label: 'Porcentaje de cumplimiento por areas',
+                            data: porcentajesPeriodos,
+                            backgroundColor: coloresPeriodos,
+                            borderColor: coloresPeriodos,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    min: 0,
+                                    max: 100,
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            }
+            else{
+                $('#grafica_estadistica_periodos').hide();
+            } 
+        }
+    });
+}
 function getRandomColor() {//Genera un color aleatorio
     var letters = '0123456789ABCDEF';
     var color = '#';
@@ -124,21 +205,3 @@ function porcentajeDosValores(valor1, valor2) {//porcentaje de algo en base a do
     var resultado=(valor2/valor1)*100;
     return resultado;
 }
-// $('#id_descargarGrafico').click(function (e) { 
-//   downloadPDF();
-// });
-//download pdf form hidden canvas
-// function downloadPDF() {
-//     var canvas = document.querySelector('#myChart');
-// 	//creates image
-//     canvas.fillStyle = "red";
-
-// 	var canvasImg = canvas.toDataURL("image/png", 1.0);
-  
-// 	//creates PDF from img
-// 	var doc = new jsPDF('landscape');
-// 	doc.setFontSize(20);
-// 	doc.text(15, 15, "Cool Chart");
-// 	doc.addImage(canvasImg, 'JPEG', 10, 10, 280, 150 );
-//     window.open(doc.output('bloburl'));
-// }

@@ -5,5 +5,6 @@
     </select>
 </div>
 <br>
-<canvas id="grafica_estadistica" width="auto" height="auto"></canvas>
-<script src="{{ asset('js/ReportesWeb.js')}}"></script>
+<div>
+    <canvas id="grafica_estadistica" width="auto" height="auto"></canvas>
+</div>

@@ -32,16 +32,20 @@ class ReportesController extends Controller
                 ->get();
         return response::json($area);
     }
-    public function ObtenerPorcentajePeriodos($id){
-        $periodos = DB::table('evaluacion_poa')
-                ->where('estado','E')
+    public function ObtenerPorcentajePeriodos(){
+        $periodos = DB::table('periodo_poa')
+                ->join('evaluacion_poa', 'periodo_poa.id', '=', 'evaluacion_poa.id_poa')
+                // ->where('evaluacion_poa.estado','E')
                 ->join('meta_evaluacion', 'evaluacion_poa.id', '=', 'meta_evaluacion.id_evaluacion')
-                ->select('evaluacion_poa.etapa','meta_evaluacion.porcentaje',
-                'meta_evaluacion.porcentaje_evaluado')
+                ->orderby('periodo_poa.descripcion')
+                ->select('evaluacion_poa.estado as estado_poa',
+                        'evaluacion_poa.etapa',
+                        'meta_evaluacion.porcentaje',
+                        'meta_evaluacion.porcentaje_evaluado',
+                        'periodo_poa.descripcion as periodo')
                 ->get();
         return response::json($periodos);
     }
-    
 }
 
 // ->select('area_proyecto.id_area_proyecto',

@@ -64,7 +64,7 @@ Route::get('/evaluacionRutas', 'EvaluacionesRutasController@ObtenerEvaluaciones'
 Route::get('/obtenerAreas/{id}', 'ReportesController@ObtenerArea');
 
 //Obtiene las los periodos y sus repectivos porcentajes de cumplimiento
-Route::get('/obtenerPorcentaje/{id}', 'ReportesController@ObtenerPorcentajePeriodos');
+Route::get('/obtenerPorcentaje', 'ReportesController@ObtenerPorcentajePeriodos');
 
 
 // Reportes
