@@ -88,7 +88,6 @@ function listar_periodos() {//llena la tabla con todos los periodos
                 <td id="descripcion'+ val.id + '">'+ val.descripcion + '</td>\
                 <td>'+ val.fecha_inicio + '</td>\
                 <td>'+ val.fecha_fin + '</td>\
-                <td>'+ val.estado + '</td>\
                 <td><button class="btn btn-success abrir_modal" id="periodo'+ val.id + '" value="' + val.id + '">Abrir Periodo</button></td></tr>'
                 $('#tabla_periodos').append(periodo);
             });

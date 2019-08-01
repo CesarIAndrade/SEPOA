@@ -9,7 +9,6 @@
                             <th scope="col">Descripcion</th>
                             <th scope="col">Fecha de inicio</th>
                             <th scope="col">Fecha fin</th>
-                            <th scope="col">Estado</th>
                             <th scope="col">Abrir Periodo</th>
                         </tr>
                     </thead>

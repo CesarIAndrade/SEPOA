@@ -48,6 +48,7 @@ function MostrarEvaluacion(id, porcentaje) {
             $('#contenido_evidencia').hide();
         }
         else{
+            $('#id_porcentaje_evaluado').attr('max', data.porcentaje);
             $('#contenido_evidencia').show();
             $('#id_porcentaje_cumplido').val(data.porcentaje_cumplido)
             if (data.porcentaje_evaluado==null||data.porcentaje_evaluado=="") {

@@ -99,6 +99,7 @@ function MostrarModalEvidencias(id, porcentaje) {
         }
         else{
             $('#contenido_evidencia').show();
+            $('#id_porcentaje_cumplido').attr('max', data.porcentaje);
             $('#id_porcentaje_cumplido').val(data.porcentaje_cumplido)
             $('#archivo_disponible').val(data.evidencia)
         }
