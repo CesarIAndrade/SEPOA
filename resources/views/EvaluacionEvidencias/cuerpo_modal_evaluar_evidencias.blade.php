@@ -2,7 +2,7 @@
     <div class="col-md-6">
         <div class="form-group has-feedback">
             <label for="id_porcentaje_cumplido">{{ __('Porcentaje Cumplido') }}</label>
-            <input id="id_porcentaje_cumplido"  value="" type="number" min="0" class="form-control" disabled>
+            <input autocomplete="off" id="id_porcentaje_cumplido" value="" type="number" min="0" class="form-control" disabled>
         </div>
     </div>
     <div class="col-md-6">

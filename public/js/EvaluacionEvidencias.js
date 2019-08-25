@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    $('#id').on('click', function () {
-        $('#modal_evaluar_evidencia').modal('show');
-    })
+    // $('#id').on('click', function () {
+    //     $('#modal_evaluar_evidencia').modal('show');
+    // })
     CargarPeriodosActivos();
 });
 
@@ -38,35 +38,35 @@ $(document).on("submit","#formulario_evaluacion_evidencias",function (e) {
 });
 
 function MostrarEvaluacion(id, porcentaje) {
-    $('#formulario_evaluacion_evidencias').trigger('reset');
-    $('#id_tabla_evidencia_revisar').html('');
-    $('#modal_evaluar_evidencia').modal('show');
-    $('#formulario_evaluacion_evidencias').val(id);
-    $.get("buscarEvidencia/"+id,
-    function (data) {
-        if(data.evidencia==null||data.evidencia==""){
-            $('#contenido_evidencia').hide();
-        }
-        else{
-            $('#id_porcentaje_evaluado').attr('max', data.porcentaje);
-            $('#contenido_evidencia').show();
-            $('#id_porcentaje_cumplido').val(data.porcentaje_cumplido)
-            if (data.porcentaje_evaluado==null||data.porcentaje_evaluado=="") {
-
-            } else {
-                $('#id_porcentaje_evaluado').val(data.porcentaje_evaluado)
+    if(porcentaje!='disabled'){
+        $('#formulario_evaluacion_evidencias').trigger('reset');
+        $('#id_tabla_evidencia_revisar').html('');
+        $('#modal_evaluar_evidencia').modal('show');
+        $('#formulario_evaluacion_evidencias').val(id);
+        $.get("buscarEvidencia/"+id,
+        function (data) {
+            if(data.evidencia==null||data.evidencia==""){
+                $('#contenido_evidencia').hide();
             }
-            $('#id_tabla_evidencia_revisar').html('');
-            var periodo = '<tr>\
-            <td>'+ data.evidencia + '</td>\
-            <td><center><a class="btn btn-primary" target="_blank" href="ArchivosSubidos/'+data.evidencia+'">Visualizar/Abrir</a></center></td></tr>'
-            $('#id_tabla_evidencia_revisar').append(periodo);
-        }
-    },
-    "json"
-);
-    $('#id_porcentaje_esperado').val(porcentaje)
+            else{
+                $('#id_porcentaje_evaluado').attr('max', data.porcentaje);
+                $('#contenido_evidencia').show();
+                $('#id_porcentaje_cumplido').val(data.porcentaje_cumplido)
+                if (data.porcentaje_evaluado==null||data.porcentaje_evaluado=="") {
 
+                } else {
+                    $('#id_porcentaje_evaluado').val(data.porcentaje_evaluado)
+                }
+                $('#id_tabla_evidencia_revisar').html('');
+                var periodo = '<tr>\
+                <td>'+ data.evidencia + '</td>\
+                <td><center><a class="btn btn-primary" target="_blank" href="ArchivosSubidos/'+data.evidencia+'"><i class="fa fa-file-pdf-o"></i> Visualizar/Abrir Archivo</a></center></td></tr>'
+                $('#id_tabla_evidencia_revisar').append(periodo);
+            }
+        },
+        "json"
+    );
+    }
 }
 //llenar tabla de periodos de evaluacion activos
 function CargarPeriodosActivos() {  
@@ -107,17 +107,18 @@ function CargarPeriodosActivos() {
             else{
                 valor=elemento.evidencia
             }
-            var periodo = '<tr id="metaeval' + elemento.idmeta_evaluacion + '">\
+            var periodo = '<tr  id="metaeval' + elemento.idmeta_evaluacion + '">\
             <td>'+ c + '</td>\
             <td class="'+valor4+'">'+valor3+'</td>\
             <td>'+ elemento.descripcion + '</td>\
             <td>'+ elemento.fecha_inicio + '</td>\
             <td>'+ elemento.fecha_fin + '</td>'            
             periodo+='<td>'+valor+'</td>\
-            <td><button '+valor2+' class="btn btn-info" id="metaeva'+elemento.idmeta_evaluacion+'" onClick="MostrarEvaluacion('+elemento.idmeta_evaluacion+','+elemento.porcentaje_cumplido+')">Revisar</button></td>\
+            <td><button '+valor2+' class="btn btn-info" id="metaeva'+elemento.idmeta_evaluacion+'" onClick="MostrarEvaluacion('+elemento.idmeta_evaluacion+','+valor2+')"><i class="fa fa-check-square-o"></i> Revisar evidencia</button></td>\
             </tr>'
-            
-            $('#tabla_lista_evaluacion_evidencias').append(periodo);
+            if(elemento.estado!="E"){
+                $('#tabla_lista_evaluacion_evidencias').append(periodo);
+            }
             c++
         });
     })

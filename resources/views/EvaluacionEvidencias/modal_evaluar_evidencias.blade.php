@@ -13,8 +13,8 @@
                     @include('EvaluacionEvidencias.tabla_evidencias')
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" >Guardar cambios</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" ><i class="glyphicon glyphicon-floppy-disk"></i> Guardar cambios</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times-circle"></i> Cerrar</button>
                 </div>
             </form>
         </div>

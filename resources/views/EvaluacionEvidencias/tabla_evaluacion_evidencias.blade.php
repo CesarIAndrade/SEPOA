@@ -11,7 +11,7 @@
                             <th scope="col">Fecha de inicio</th>
                             <th scope="col">Fecha de finalizacion</th>
                             <th scope="col">Evidencia</th>
-                            <th scope="col">Revisión</th>
+                            <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody id="tabla_lista_evaluacion_evidencias">
