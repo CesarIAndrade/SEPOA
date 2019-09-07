@@ -88,7 +88,7 @@ function listar_periodos() {//llena la tabla con todos los periodos
                 <td id="descripcion'+ val.id + '">'+ val.descripcion + '</td>\
                 <td>'+ val.fecha_inicio + '</td>\
                 <td>'+ val.fecha_fin + '</td>\
-                <td><button class="btn btn-success abrir_modal" id="periodo'+ val.id + '" value="' + val.id + '">Abrir Periodo</button></td></tr>'
+                <td><button class="btn btn-success abrir_modal" id="periodo'+ val.id + '" value="' + val.id + '"><i class="fa fa-check-square-o"></i> Abrir Periodo</button></td></tr>'
                 $('#tabla_periodos').append(periodo);
             });
         },
@@ -109,7 +109,7 @@ function llenar_evaluacion_periodo() { //llena la tabla de las etapas de evaluac
                 if ((ComparacionDeFechas(val.fecha_fin,ObtenerFechaActual()))>=0) {
                     actividad='';
                 }
-                etapa+='<td><button type = "button" class="'+clase[0]+' seleccionado" onclick="confirmacion_modal2(etapaBtn' + val.id +')" id="etapaBtn' + val.id + '" value="'+val.id+'" '+clase[2]+' '+actividad+'>'+clase[1]+'</button></td></tr>'
+                etapa+='<td><button type = "button" class="'+clase[0]+' seleccionado" onclick="confirmacion_modal2(etapaBtn' + val.id +')" id="etapaBtn' + val.id + '" value="'+val.id+'" '+clase[2]+' '+actividad+'><i class="'+clase[3]+'"></i> '+clase[1]+'</button></td></tr>'
             $('#tabla_evaluacion').append(etapa);
         });
     });
@@ -117,14 +117,14 @@ function llenar_evaluacion_periodo() { //llena la tabla de las etapas de evaluac
 
 function crear_clase_para_etapa(estado) {//llena un arreglo para controlar las clases de llenado en la tabla
     if (estado == 'H') {                 //etapas de evaluacion
-        var arreglo = ['btn btn-success', 'Habilitar', '']
+        var arreglo = ['btn btn-success', 'Habilitar', '','fa fa-toggle-off']
         return arreglo;
     }
     else if (estado == 'D') {
-        var arreglo = ['btn btn-danger', 'Deshabilitar', '']
+        var arreglo = ['btn btn-danger', 'Deshabilitar', '','fa fa-toggle-on']
         return arreglo;
     }else if(estado == 'E'){
-        var arreglo = ['btn btn-success', 'Evaluado','disabled']
+        var arreglo = ['btn btn-success', 'Evaluado','disabled','fa fa-check-square-o']
         return arreglo;
     }
 }

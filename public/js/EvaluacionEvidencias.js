@@ -89,20 +89,24 @@ function CargarPeriodosActivos() {
             var valor2=''
             var valor3=''
             var valor4=''
+            var valor5=''
             
             if(elemento.porcentaje_evaluado==null||elemento.porcentaje_evaluado==''){
                 valor3='No evaluado'
                 valor4='text-danger'
+                valor5='fa fa-square-o'
             }
             else{
                 valor3='Evaluado'
                 valor4='text-success'
+                valor5='fa fa-check-square-o'
             }
             if(elemento.evidencia==null||elemento.evidencia==''){
                 valor='No disponible'
                 valor3='No evaluable'
                 valor2='disabled'
                 valor4='text-danger'
+                valor5='fa fa-remove'
             }
             else{
                 valor=elemento.evidencia
@@ -114,7 +118,7 @@ function CargarPeriodosActivos() {
             <td>'+ elemento.fecha_inicio + '</td>\
             <td>'+ elemento.fecha_fin + '</td>'            
             periodo+='<td>'+valor+'</td>\
-            <td><button '+valor2+' class="btn btn-info" id="metaeva'+elemento.idmeta_evaluacion+'" onClick="MostrarEvaluacion('+elemento.idmeta_evaluacion+','+valor2+')"><i class="fa fa-check-square-o"></i> Revisar evidencia</button></td>\
+            <td><button '+valor2+' class="btn btn-info" id="metaeva'+elemento.idmeta_evaluacion+'" onClick="MostrarEvaluacion('+elemento.idmeta_evaluacion+','+valor2+')"><i class="'+valor5+'"></i> Revisar evidencia</button></td>\
             </tr>'
             if(elemento.estado!="E"){
                 $('#tabla_lista_evaluacion_evidencias').append(periodo);
