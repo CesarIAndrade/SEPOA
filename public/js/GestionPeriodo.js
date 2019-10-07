@@ -217,4 +217,19 @@ function ComparacionDeFechas(fecha11, fecha22) {
     return (diasDif/(1000 * 60 * 60 * 24))
 }
 
+// var ws=new WebSocket('wss://foo.chat-api.ws')
+// ws.onopen=()=>{
+// 	console.log('connected')
+// };
+// ws.onmessage = e => { 
+//     const msg = JSON.parse(e.data);
+//     console.log(msg); 
+// };
+// ws.onerror = e => {
+//     console.log(e);
+// }
 
+// ws.onclose = e => { 
+//     console.log('Connection closed');
+//     console.log(e);
+// } 

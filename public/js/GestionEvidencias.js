@@ -35,7 +35,6 @@ $(document).ready(function () {
 });
 
 //obtener relacion entre metas evaluacion
-
  //obtebner metas para la tabla
  function CargarMetas(id) {
      var valor

@@ -1,4 +1,16 @@
+var opcion=0;
 $(document).ready(function () {
+    $("#id_observacion_gregar").click(function () {
+        if(opcion==0){
+            $('#div_observacion_agregar').show()
+            $('#contenido_evidencia').prop("required", true);
+            opcion=1;
+        }else{
+            $('#div_observacion_agregar').hide()
+            $('#div_observacion_agregar').removeAttr('required')
+            opcion=0;
+        } 
+    });
     // $('#id').on('click', function () {
     //     $('#modal_evaluar_evidencia').modal('show');
     // })
@@ -10,6 +22,7 @@ $(document).on("submit","#formulario_evaluacion_evidencias",function (e) {
     var formData = {
         porcentaje_evaluado: $('#id_porcentaje_evaluado').val(),
         porcentaje_cumplido: $('#id_porcentaje_cumplido').val(),
+        observacion: $('#id_observacion_agregada').val(),
 
     }
     console.log(formData)
@@ -42,6 +55,9 @@ function MostrarEvaluacion(id, porcentaje) {
         $('#formulario_evaluacion_evidencias').trigger('reset');
         $('#id_tabla_evidencia_revisar').html('');
         $('#modal_evaluar_evidencia').modal('show');
+        $('#div_observacion_agregar').hide()
+        $('#contenido_evidencia').removeAttr("required");
+        opcion=0;
         $('#formulario_evaluacion_evidencias').val(id);
         $.get("buscarEvidencia/"+id,
         function (data) {
@@ -51,6 +67,9 @@ function MostrarEvaluacion(id, porcentaje) {
             else{
                 $('#id_porcentaje_evaluado').attr('max', data.porcentaje);
                 $('#contenido_evidencia').show();
+                if(data.observacion!="Ninguna"){
+                    $('#id_observacion_agregada').val(data.observacion);
+                }
                 $('#id_porcentaje_cumplido').val(data.porcentaje_cumplido)
                 if (data.porcentaje_evaluado==null||data.porcentaje_evaluado=="") {
 

@@ -132,6 +132,9 @@ class MetaEvaluacionController extends Controller
         $metaeval=MetaEvaluacion::find($id);
         if($request->porcentaje_cumplido!=null){
             $metaeval->porcentaje_evaluado=$request->porcentaje_evaluado;
+            if($request->observacion!=null){
+                $metaeval->observacion=$request->observacion;
+            }
             $metaeval->save();
             return Response::json($metaeval);  
         }

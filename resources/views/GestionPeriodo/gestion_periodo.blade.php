@@ -9,8 +9,11 @@ Gestión de Periodos
             <h3 class="panel-title"><center>Gestión de periodos de evaluación</center></h3>
         </div>
         <div class="panel-body">
+            <ol class="breadcrumb">
+            <center><li><h2>Lista de periodos registrados</h2></li></center>
             @include('GestionPeriodo.modal_periodo')
-            @include('GestionPeriodo.tabla_periodo')
+            @include('GestionPeriodo.tabla_periodo')                
+            </ol>
         </div>
     </div>
 <script src='js/GestionPeriodo.js'></script>
