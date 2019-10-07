@@ -14,7 +14,7 @@
     <div class="col-md-12" id="contenido_evidencia">
         <div class="form-group has-feedback">
             <label for="archivo_disponible">{{ __('Archivo disponible') }}</label>
-            <input id="archivo_disponible" type="text" class="form-control" disabled>
+            <input id="archivo_disponible" name="archivo_disponible" type="text" class="form-control" disabled>
         </div>
     </div>
 </div> 
@@ -24,7 +24,7 @@
         <i class="fa fa-file-pdf-o"></i>
         <span id = "nombre_archivo">Subir Archivo</span>
     </label>
-    <input multiple = "true" style = "display:none" autocomplete="off" id="archivo_subido" class="form-control" type="file" name="archivo_subido" accept=".pdf" required >
+    <input multiple = "true" style = "display:none" autocomplete="off" id="archivo_subido" class="form-control" type="file" name="archivo_subido" accept=".pdf">
 </div>
 
 <script>

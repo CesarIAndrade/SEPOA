@@ -122,9 +122,13 @@ class MetaEvaluacionController extends Controller
             Storage::disk('ArchivosSubidos')->put($ruta, file_get_contents($archivo->getRealPath()));
             $metaeval->evidencia=$ruta;
             $metaeval->save();
-
             return Response::json($metaeval);
-         } 
+         }
+         elseif($request->archivo_disponible==""){
+            $metaeval->porcentaje_cumplido=$request->porcentaje_cumplido;
+            $metaeval->save();
+            return Response::json($metaeval);
+         }
         
     }
     public function GuardarEvaluacion(request $request, $id)

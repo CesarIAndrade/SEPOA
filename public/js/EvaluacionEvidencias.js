@@ -2,12 +2,12 @@ var opcion=0;
 $(document).ready(function () {
     $("#id_observacion_gregar").click(function () {
         if(opcion==0){
+            $('#contenido_evidencia').attr("required");
             $('#div_observacion_agregar').show()
-            $('#contenido_evidencia').prop("required", true);
             opcion=1;
         }else{
-            $('#div_observacion_agregar').hide()
             $('#div_observacion_agregar').removeAttr('required')
+            $('#div_observacion_agregar').hide()
             opcion=0;
         } 
     });
@@ -56,12 +56,12 @@ function MostrarEvaluacion(id, porcentaje) {
         $('#id_tabla_evidencia_revisar').html('');
         $('#modal_evaluar_evidencia').modal('show');
         $('#div_observacion_agregar').hide()
-        $('#contenido_evidencia').removeAttr("required");
         opcion=0;
         $('#formulario_evaluacion_evidencias').val(id);
         $.get("buscarEvidencia/"+id,
         function (data) {
             if(data.evidencia==null||data.evidencia==""){
+                $('#contenido_evidencia').removeAttr("required");
                 $('#contenido_evidencia').hide();
             }
             else{

@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Subida de Evidencias</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close mostrarMensajeSalida" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -14,7 +14,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" id = "subir_evidencia">Guardar cambios</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-secondary mostrarMensajeSalida" data-dismiss="modal">Cerrar</button>
                 </div>
             </form>
         </div>

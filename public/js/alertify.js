@@ -47,7 +47,7 @@
             closeButton:false
         },
         glossary:{
-            title:'Confimación',
+            title:'Confirmación',
             ok: 'OK',
             cancel: 'Cancel',
             acccpt: 'Accept',

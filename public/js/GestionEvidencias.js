@@ -3,34 +3,47 @@ var userid;
 $(document).ready(function () {
     userid = $('#user_information').val();
     GargarTodo()
+    $(".mostrarMensajeSalida").click(function (e) { 
+        alertify.error('Cancelado');       
+    });
     $(document).on("submit","#formulario_subida_evidencias",function (e) {
+        //console.log($("#archivo_disponible").val())
+        if ($("#archivo_subido")[0].files.length == 0 && $("#archivo_disponible").val()=="") {
+            //grab the dialog instance using its parameter-less constructor then set multiple settings at once.
+            alertify.alert()
+            .setting({
+                'label':'Aceptar',
+                'message': 'Debe subir un archivo para guardar' ,
+                'onok': function(){}
+            }).show();
+        }else{
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            var formData = new FormData($(this)[0]);
+            var id=$(this).val()
+            $.ajax({
+                type: "POST",
+                url: "subirEvidencia/" + id,
+                data: formData,
+                cache: false,
+                contentType:false,
+                processData:false,
+                dataType: "json",
+                success: function (val) {
+                    alertify.success('Evidencia almacenada correctamente');
+                },
+                error: function (val) {
+                    alertify.error('Se ha producido un error en la petición');
+                }
+            });
+            $('#formulario_subida_evidencias').trigger('reset');
+            $('#nombre_archivo').text('Subir Archivo');
+            $('#modal_subida_evidencia').modal('hide');
+        }
         e.preventDefault()
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        var formData = new FormData($(this)[0]);
-        var id=$(this).val()
-        $.ajax({
-            type: "POST",
-            url: "subirEvidencia/" + id,
-            data: formData,
-            cache: false,
-            contentType:false,
-            processData:false,
-            dataType: "json",
-            success: function (val) {
-                alertify.success('Evidencia almacenada correctamente');
-            },
-            error: function (val) {
-                alertify.error('Se ha producido un error en la petición');
-            }
-        });
-        $('#formulario_subida_evidencias').trigger('reset');
-        $('#nombre_archivo').text('Subir Archivo');
-        $('#modal_subida_evidencia').modal('hide');
-
     });
 });
 

@@ -51,7 +51,7 @@ function crear_periodo(etapa_seleccionada,estado) {
         fecha_fin_evaluacion: $('#id_md_fecha_fin_periodo').val(),
         estado: estado,
     }
-    console.log($('#id_md_fecha_inicio_periodo').val())
+    //console.log(estado)
     $.ajax({
         type: "PUT",
         url: "periodo/" + etapa_seleccionada,
@@ -63,7 +63,7 @@ function crear_periodo(etapa_seleccionada,estado) {
                 <td>'+ val.etapa + '</td>\
                 <td>'+ val.fecha_inicio + '</td>\
                 <td>'+ val.fecha_fin + '</td>\
-                <td><button type = "button" class="'+clase[0]+' seleccionado" onclick="confirmacion_modal2(etapaBtn' + val.id +')" id="etapaBtn' + val.id + '" value="' + val.id + '" '+clase[2]+'>'+clase[1]+'</button></td></tr>'
+                <td><button type = "button" class="'+clase[0]+' seleccionado" onclick="confirmacion_modal2(etapaBtn' + val.id +')" id="etapaBtn' + val.id + '" value="' + val.id + '" '+clase[2]+'><i class="'+clase[3]+'"></i> '+clase[1]+'</button></td></tr>'
             $('#etapa' + val.id).replaceWith(etapa);
             $('#modal_apertura_periodo').trigger('reset');
             $('#id_md_fecha_fin_periodo').val('');
@@ -192,7 +192,7 @@ function confirmacion_modal2(id) { //Abre un modal para confirmar la apertura o 
     // llenar_fecha();
     obtener_fecha_limite($(id).val());
     etapa_seleccionada = $(id).val();
-    estado = $(id).html();   
+    estado = $(id).text();   
     MostrarIngresoFechas();
     $('#modal_de_confirmacion').modal("show");
 
