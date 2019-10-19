@@ -26,4 +26,5 @@
     </div>
 </div>
 
-<script src="js/notificaciones.js"></script>
+<!-- <script src="js/notificaciones.js"></script> -->
+

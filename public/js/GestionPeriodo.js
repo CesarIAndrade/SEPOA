@@ -60,7 +60,7 @@ function crear_periodo(etapa_seleccionada,estado) {
         success: function (val) {
             clase = crear_clase_para_etapa(val.estado);
             var etapa = '<tr id="etapa' + val.id + '">\
-                <td>'+ val.etapa + '</td>\
+                <td>'+ val.numero + '</td>\
                 <td>'+ val.fecha_inicio + '</td>\
                 <td>'+ val.fecha_fin + '</td>\
                 <td><button type = "button" class="'+clase[0]+' seleccionado" onclick="confirmacion_modal2(etapaBtn' + val.id +')" id="etapaBtn' + val.id + '" value="' + val.id + '" '+clase[2]+'><i class="'+clase[3]+'"></i> '+clase[1]+'</button></td></tr>'
@@ -103,7 +103,7 @@ function llenar_evaluacion_periodo() { //llena la tabla de las etapas de evaluac
             clase = crear_clase_para_etapa(val.estado);
             var actividad='disabled';
             var etapa = '<tr id="etapa' + val.id + '">\
-                <td>'+ val.etapa + '</td>\
+                <td>'+ val.numero + '</td>\
                 <td>'+ val.fecha_inicio + '</td>\
                 <td>'+ val.fecha_fin + '</td>'
                 if ((ComparacionDeFechas(val.fecha_fin,ObtenerFechaActual()))>=0) {
